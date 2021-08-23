@@ -1,0 +1,29 @@
+
+version: "3.7"
+services:
+  react-app-nginx:
+    container_name: react-app-nginx
+    build:
+      context: ../react-app
+
+  next-app:
+    container_name: nextjs
+    build:
+      context: ../next-app
+
+  next-app-nginx:
+    container_name: next-app-nginx
+    build:
+      context: ../next-app/nginx
+    depends_on:
+      - next-app
+
+  orchestrator:
+    container_name: orchestrator
+    ports:
+      - 80:80
+    depends_on:
+      - react-app-nginx
+      - next-app-nginx
+    build:
+      context: .
