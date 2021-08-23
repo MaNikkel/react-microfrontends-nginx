@@ -9,7 +9,7 @@ RUN npm ci
 RUN npm run build
 
 # Starting NGINX
-FROM nginx
+FROM nginx:alpine
 
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
